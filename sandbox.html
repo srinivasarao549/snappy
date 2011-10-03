@@ -2,16 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">    
 	<head> 
 		<title>Hermes!</title> 
-		<script type="text/javascript" charset="utf-8" src="lib/require.js"></script>
-		<script type="text/javascript">
-			require([
-					'src/hermes.core.js'
-				], function () {
-					console.log('Loaded!');
-				});
+		<script type="text/javascript" charset="utf-8">
+			var require = {
+					'priority': ['src/hermes.core.js']
+				};
 		</script>
+		<script type="text/javascript" charset="utf-8" src="lib/require.js"></script>
 	</head> 
 	<body>
 		<canvas id="sandbox"></canvas>
+		<script type="text/javascript">
+			require([
+					'src/hermes.keyhandler.js'
+				], function () {
+					
+					var canvas
+							,hermesInst;
+					
+					canvas = document.getElementById('sandbox');
+					hermesInst = new Hermes(canvas);
+					
+					console.log(hermesInst);
+				});
+		</script>
   </body> 
 </html>
