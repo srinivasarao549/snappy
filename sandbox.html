@@ -10,7 +10,7 @@
 		<script type="text/javascript" charset="utf-8" src="lib/require.js"></script>
 	</head> 
 	<body>
-		<canvas id="sandbox"></canvas>
+		<canvas id="sandbox" style="background: black"></canvas>
 		<script type="text/javascript">
 			require([
 					'src/hermes.keyhandler.js'
@@ -21,6 +21,10 @@
 					
 					canvas = document.getElementById('sandbox');
 					hermesInst = new Hermes(canvas);
+					
+					/*hermesInst.keyhandlerAdd(hermesInst.keys.UP, function () {
+						console.log('up')
+					});*/
 					
 					console.log(hermesInst);
 				});
