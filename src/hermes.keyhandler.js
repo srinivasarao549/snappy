@@ -16,16 +16,33 @@
     ,'RIGHT': 39
   };
   
+  gh.prototype.keyhandlerInit = function keyhandlerInit () {
+    var self;
+    
+    self = this;
+    this.keysDown = [];
+    
+    function keydownHandler (ev) {
+      
+    };
+    
+    function keyupHandler (ev) {
+      
+    };
+    
+    document.body.addEventListener('keydown', eventHandler, false);
+  }
+  
   gh.prototype.keyhandlerAdd = function keyhandlerAdd (key, handler) {
     
-    eventHandler = function (ev) {
+    function eventHandler (ev) {
       if (ev.keyCode === key) {
         (handler || gh.util.noop)();
       }
     };
     
     eventHandler.name = 'eventHandler';
-    document.body.addEventListener('keydown', eventHandler, false);
+    document.body.addEventListener('keypressed', eventHandler, false);
   };
   
   gh.prototype.keyhandlerRemove = function keyhandlerRemove (key, handler) {
