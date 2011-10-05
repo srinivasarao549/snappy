@@ -6,6 +6,39 @@
   
   var gh
       ,keyMap;
+      
+  function addIfUnique (arr, val) {
+    var hasValue
+        ,i;
+    
+    hasValue = false;
+    
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] === val) {
+        hasValue = true;
+      }
+    }
+    
+    if (hasValue) {
+      arr.push(value);
+      return true;
+    }
+    
+    return false;
+  }
+  
+  function removeFirstInstanceOf (arr, val) {
+    var i;
+    
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] === val) {
+        arr.splice(i, 1);
+        break;
+      }
+    }
+    
+    return;
+  }
   
   gh = global.Hermes;
   
@@ -30,7 +63,8 @@
       
     };
     
-    document.body.addEventListener('keydown', eventHandler, false);
+    document.body.addEventListener('keydown', keydownHandler, false);
+    document.body.addEventListener('keyup', keyupHandler, false);
   }
   
   gh.prototype.keyhandlerAdd = function keyhandlerAdd (key, handler) {
