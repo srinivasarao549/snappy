@@ -21,15 +21,11 @@
       this.keysdown = {};
 
       function keydownHandler (ev) {
-        //addIfUnique(self.keysdown, ev.which);
         self.keysdown[ev.which] = true;
-
       };
 
       function keyupHandler (ev) {
-        //removeFirstInstanceOf(self.keysdown, ev.which);
         delete self.keysdown[ev.which];
-        console.log(self.keysdown+'');
       };
 
       document.body.addEventListener('keydown', keydownHandler, false);
