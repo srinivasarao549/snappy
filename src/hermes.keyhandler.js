@@ -56,7 +56,7 @@
     this.keysDown = [];
 
     function keydownHandler (ev) {
-
+      console.log(ev)
     };
 
     function keyupHandler (ev) {
