@@ -7,7 +7,7 @@
   var gh
       ,keyMap;
 
-  function addIfUnique (arr, val) {
+  /*function addIfUnique (arr, val) {
     var hasValue
         ,i;
 
@@ -38,7 +38,7 @@
     }
 
     return;
-  }
+  }*/
 
   gh = global.Hermes;
 
@@ -53,14 +53,18 @@
     var self;
 
     self = this;
-    this.keysDown = [];
+    this.keysdown = {};
 
     function keydownHandler (ev) {
-      console.log(ev)
+      //addIfUnique(self.keysdown, ev.which);
+      self.keysdown[ev.which] = true;
+
     };
 
     function keyupHandler (ev) {
-
+      //removeFirstInstanceOf(self.keysdown, ev.which);
+      delete self.keysdown[ev.which];
+      console.log(self.keysdown+'');
     };
 
     document.body.addEventListener('keydown', keydownHandler, false);
