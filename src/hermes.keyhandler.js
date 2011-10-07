@@ -57,13 +57,21 @@
 
     };*/
 
-    Hermes.prototype.bindHeldKey = function (key, handler) {
+    Hermes.prototype.bindKeyHold = function (key, handler) {
       this.keyhandlerHeldHandlers[key] = handler;
     };
 
-    Hermes.prototype.unbindHeldKey = function (key, handler) {
+    Hermes.prototype.unbindKeyHold = function (key, handler) {
       delete this.keyhandlerHeldHandlers[key];
     };
+
+    Hermes.prototype.bindKeyPress = function (key, handler) {
+
+    }
+
+    Hermes.prototype.unbindKeyPress = function (key, handler) {
+
+    }
 
     Hermes.prototype.keyhandlerTick = function () {
       _.each(this.keyhandlerKeysdown, function (val, key) {
