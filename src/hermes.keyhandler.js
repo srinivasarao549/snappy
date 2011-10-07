@@ -31,6 +31,14 @@
 
       document.body.addEventListener('keydown', keydownHandler, false);
       document.body.addEventListener('keyup', keyupHandler, false);
+
+      this.tickSteps.push({
+        'name': 'keyhandler'
+        ,'handler': this.keyhandlerTick
+      });
+
+      // Init can only run once<F9><F8>
+      this.keyHandlerInit = function () {};
     }
 
     /*Hermes.prototype.keyhandlerAdd = function keyhandlerAdd (key, handler) {
@@ -48,18 +56,18 @@
     Hermes.prototype.keyhandlerRemove = function keyhandlerRemove (key, handler) {
 
     };*/
-    
-    Hermes.prototype.keyhandlersBindHeldKey = function (key, handler) {
+
+    Hermes.prototype.bindHeldKey = function (key, handler) {
       this.keyhandlerHeldHandlers[key] = handler;
     };
-    
-    Hermes.prototype.keyhandlersUnbindHeldKey = function (key, handler) {
+
+    Hermes.prototype.unbindHeldKey = function (key, handler) {
       delete this.keyhandlerHeldHandlers[key];
     };
-    
+
     Hermes.prototype.keyhandlerTick = function () {
       _.each(this.keyhandlerKeysdown, function (val, key) {
-        (this.keyhandlerKeysdown[key] || Hermes.util.noop)();
+        (this.keyhandlerHeldHandlers[key] || Hermes.util.noop)();
       }, this);
     };
   });

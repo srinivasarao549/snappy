@@ -17,6 +17,9 @@
           canvas = document.getElementById('sandbox');
           hermesInst = new Hermes(canvas);
           hermesInst.keyhandlerInit();
+          hermesInst.bindHeldKey(hermesInst.keys.UP, function () {
+            console.log('up is held');
+          });
           
           /*hermesInst.keyhandlerAdd(hermesInst.keys.UP, function () {
             console.log('up')

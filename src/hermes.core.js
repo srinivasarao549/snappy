@@ -22,18 +22,30 @@
       self = this;
       this.canvas = canvas;
       this.context = canvas.getContext('2d');
-      
+      this.tickSteps = [];
+
       this.config = {
         'fps': 30
       };
 
+      this.tick();
+
       return this;
     };
-    
-    gh.prototype.gameLoop = function () {
-      var self;
-      
+
+    gh.prototype.tick = function () {
+      var self
+          ,i;
+
       self = this;
+
+      for (i = 0; i < this.tickSteps.length; i++) {
+        this.tickSteps[i].handler.call(this); 
+      }
+
+      setTimeout(function () {
+        self.tick();
+      }, 1000 / this.config.fps);
     };
 
     gh.util = {};
