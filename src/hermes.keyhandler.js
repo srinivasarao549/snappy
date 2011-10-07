@@ -18,21 +18,22 @@
       var self;
 
       self = this;
-      this.keysdown = {};
+      this.keyhandlerKeysdown = {};
+      this.keyhandlerHeldHandlers = {};
 
       function keydownHandler (ev) {
-        self.keysdown[ev.which] = true;
+        self.keyhandlerKeysdown[ev.which] = true;
       };
 
       function keyupHandler (ev) {
-        delete self.keysdown[ev.which];
+        delete self.keyhandlerKeysdown[ev.which];
       };
 
       document.body.addEventListener('keydown', keydownHandler, false);
       document.body.addEventListener('keyup', keyupHandler, false);
     }
 
-    Hermes.prototype.keyhandlerAdd = function keyhandlerAdd (key, handler) {
+    /*Hermes.prototype.keyhandlerAdd = function keyhandlerAdd (key, handler) {
 
       function eventHandler (ev) {
         if (ev.keyCode === key) {
@@ -46,6 +47,20 @@
 
     Hermes.prototype.keyhandlerRemove = function keyhandlerRemove (key, handler) {
 
+    };*/
+    
+    Hermes.prototype.keyhandlersBindHeldKey = function (key, handler) {
+      this.keyhandlerHeldHandlers[key] = handler;
+    };
+    
+    Hermes.prototype.keyhandlersUnbindHeldKey = function (key, handler) {
+      delete this.keyhandlerHeldHandlers[key];
+    };
+    
+    Hermes.prototype.keyhandlerTick = function () {
+      _.each(this.keyhandlerKeysdown, function (val, key) {
+        (this.keyhandlerKeysdown[key] || Hermes.util.noop)();
+      }, this);
     };
   });
 } (this));
