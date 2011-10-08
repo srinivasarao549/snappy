@@ -19,7 +19,8 @@
 
       self = this;
       this.keyhandlerKeysdown = {};
-      this.keyhandlerHeldHandlers = {};
+      this.keyhandlerHoldHandlers = {};
+      this.keyhandlerPressHandlers = {};
 
       function keydownHandler (ev) {
         self.keyhandlerKeysdown[ev.which] = true;
@@ -37,7 +38,7 @@
         ,'handler': this.keyhandlerTick
       });
 
-      // Init can only run once<F9><F8>
+      // Init can only run once
       this.keyHandlerInit = function () {};
     }
 
@@ -53,29 +54,48 @@
       document.body.addEventListener('keypressed', eventHandler, false);
     };
 
-    Hermes.prototype.keyhandlerRemove = function keyhandlerRemove (key, handler) {
+    Hermes.prototype.keyhandlerRemove = function keyhandlerRemove (key, 
+          handler) {
 
     };*/
 
     Hermes.prototype.bindKeyHold = function (key, handler) {
-      this.keyhandlerHeldHandlers[key] = handler;
+      this.keyhandlerHoldHandlers[key] = handler;
     };
 
     Hermes.prototype.unbindKeyHold = function (key, handler) {
-      delete this.keyhandlerHeldHandlers[key];
+      delete this.keyhandlerHoldHandlers[key];
     };
 
     Hermes.prototype.bindKeyPress = function (key, handler) {
+      if (!this.keyhandlerPressHandlers[key]) {
+        this.keyhandlerPressHandlers[key] = [];
+      }
 
+      this.keyhandlerPressHandlers[key].push(handler);
     }
 
     Hermes.prototype.unbindKeyPress = function (key, handler) {
 
     }
+    
+    function invokeKeydownHandlers (hermesInst, forKey) {
+      var i, len;
+      
+      if (hermesInst.keyhandlerPressHandlers[forKey] 
+          && hermesInst.keyhandlerPressHandlers[forKey].length > 0) {
+        len = hermesInst.keyhandlerPressHandlers[forKey].length;
+
+        for (i = 0; i < len; i++) {
+          hermesInst.keyhandlerPressHandlers[forKey][i].call(hermesInst);
+        }
+      }
+    }
 
     Hermes.prototype.keyhandlerTick = function () {
       _.each(this.keyhandlerKeysdown, function (val, key) {
-        (this.keyhandlerHeldHandlers[key] || Hermes.util.noop)();
+        (this.keyhandlerHoldHandlers[key] || Hermes.util.noop).call(this);
+        invokeKeydownHandlers(this, key);
       }, this);
     };
   });

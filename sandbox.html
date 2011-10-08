@@ -20,6 +20,10 @@
           hermesInst.bindKeyHold(hermesInst.keys.UP, function () {
             console.log('up is held');
           });
+
+					hermesInst.bindKeyPress(hermesInst.keys.DOWN, function () {
+						console.log('down is pressed');
+					});
           
           /*hermesInst.keyhandlerAdd(hermesInst.keys.UP, function () {
             console.log('up')
