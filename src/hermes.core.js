@@ -45,7 +45,6 @@
 
       self = this;
       this.canvas = canvas;
-      this.context = canvas.getContext('2d');
       this.config = _.defaults(opt_config || {}, defaultConfig);
       this._tickSteps = [];
       this._tick();

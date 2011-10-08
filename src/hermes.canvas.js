@@ -17,18 +17,33 @@
       canvas[name] = size;
       canvas.style[name] = size + 'px';
     }
+
+
+    /**
+     * @private
+     * Is called for every frame update to do general canvas updates.
+     * pressed and held keys.
+     */
+    Hermes.prototype._tick_canvas = function () {
+      this.canvas_clear();
+    };
     
     
     /**
      * Sets up an HTMLCanvas element to be used by Hermes.
      */
     Hermes.prototype.canvas_init = function () {
-      this.canvas_dimension({
+      this.context = this.canvas.getContext('2d');
+      this.canvas_dimensions({
         'height': this.config.height
         ,'width': this.config.width
       });
       
       this.canvas_color(this.config.color);
+      this._tickSteps.push({
+        'name': 'canvas'
+        ,'handler': this._tick_canvas
+      });
     };
 
 
@@ -39,7 +54,7 @@
      * @returns {Object} An Object containing the canvas' current 'height'
      *    and `width` properties.
      */
-    Hermes.prototype.canvas_dimension = function (opt_dimensions) {
+    Hermes.prototype.canvas_dimensions = function (opt_dimensions) {
       if (opt_dimensions) {
         _.each(['height', 'width'], function (dimensionName) {
           if (opt_dimensions.hasOwnProperty(dimensionName)) {
@@ -55,7 +70,7 @@
         'height': this.config.height
         ,'width': this.config.width
       };
-    }
+    };
 
 
     /**
@@ -69,7 +84,19 @@
       }
       
       return this.canvas.style.backgroundColor;
-    }
+    };
+
+
+    /**
+     * Clears out the canvas and sets it back to its original color.
+     */
+    Hermes.prototype.canvas_clear = function () {
+      var currentDimensions;
+      
+      currentDimensions = this.canvas_dimensions();
+      this.context.clearRect(0, 0, currentDimensions.width, 
+          currentDimensions.height);
+    };
     
     
   });

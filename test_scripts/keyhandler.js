@@ -1,12 +1,12 @@
-define(['src/hermes.keyhandler'], function () {
+define(['src/hermes.key'], function () {
   
   if (!window.testModule) {
     window.testModule = {};
   }
   
   _.extend(window.testModule, {
-    'keyhandlerTest': function (hermesInst) {
-      hermesInst.keyhandler_init();
+    'keyTest': function (hermesInst) {
+      hermesInst.key_init();
 
       hermesInst.bindKeyHold(hermesInst.keys.UP, function () {
         console.log('up is held');

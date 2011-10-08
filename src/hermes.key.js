@@ -3,7 +3,7 @@
  *  hermes.core.js
  */
 
-;(function hermesKeyhandler (global) {
+;(function hermeskey (global) {
   define(['src/hermes.core'], function (Hermes) {
     var keyMap;
 
@@ -20,7 +20,7 @@
           ,len
           ,handlerList;
           
-      handlerList = hermesInst.keyhandler_pressHandlers[forKey];
+      handlerList = hermesInst.key_pressHandlers[forKey];
       
       if ((handlerList)
           && (handlerList.length > 0)
@@ -53,34 +53,34 @@
      * Is called for every frame update to execute the handlers for all
      * pressed and held keys.
      */
-    Hermes.prototype._keyhandler_tick = function () {
-      _.each(this.keyhandler_keysdown, function (val, key) {
-        (this.keyhandler_holdHandlers[key] || Hermes.util.noop).call(this);
+    Hermes.prototype._tick_key = function () {
+      _.each(this.key_keysdown, function (val, key) {
+        (this.key_holdHandlers[key] || Hermes.util.noop).call(this);
         invokeKeydownHandlers(this, key);
       }, this);
     };
 
 
     /**
-     * Sets up the keyhandler module for a Hermes instance.
+     * Sets up the key module for a Hermes instance.
      */
-    Hermes.prototype.keyhandler_init = function () {
+    Hermes.prototype.key_init = function () {
       var self;
 
       self = this;
-      this.keyhandler_keysdown = {};
-      this.keyhandler_holdHandlers = {};
-      this.keyhandler_pressHandlers = {};
+      this.key_keysdown = {};
+      this.key_holdHandlers = {};
+      this.key_pressHandlers = {};
 
       function keydownHandler (ev) {
-        self.keyhandler_keysdown[ev.which] = true;
+        self.key_keysdown[ev.which] = true;
       };
 
       function keyupHandler (ev) {
-        delete self.keyhandler_keysdown[ev.which];
+        delete self.key_keysdown[ev.which];
         
-        _.each(self.keyhandler_pressHandlers, function (val, key) {
-          self.keyhandler_pressHandlers[key].canPressAgain = true;
+        _.each(self.key_pressHandlers, function (val, key) {
+          self.key_pressHandlers[key].canPressAgain = true;
         });
       };
 
@@ -90,10 +90,10 @@
       document.body.addEventListener('keyup', keyupHandler, false);
 
       this._tickSteps.push({
-        'name': 'keyhandler'
-        ,'handler': this._keyhandler_tick
+        'name': 'key'
+        ,'handler': this._tick_key
       });
-    }
+    };
 
 
     /**
@@ -107,7 +107,7 @@
     Hermes.prototype.bindKeyHold = function (key, handler) {
       // TODO(jeremyckahn): Implement multiple handlers per key hold, as done 
       // with keypress.
-      this.keyhandler_holdHandlers[key] = handler;
+      this.key_holdHandlers[key] = handler;
     };
 
 
@@ -117,7 +117,7 @@
      *    `handler` from.
      */
     Hermes.prototype.unbindKeyHold = function (key) {
-      delete this.keyhandler_holdHandlers[key];
+      delete this.key_holdHandlers[key];
     };
 
 
@@ -130,13 +130,13 @@
      * @param {Function} handler The event handler function to be invoked.
      */
     Hermes.prototype.bindKeyPress = function (key, handler) {
-      if (!this.keyhandler_pressHandlers[key]) {
-        this.keyhandler_pressHandlers[key] = [];
-        this.keyhandler_pressHandlers[key].canPressAgain = true;
+      if (!this.key_pressHandlers[key]) {
+        this.key_pressHandlers[key] = [];
+        this.key_pressHandlers[key].canPressAgain = true;
       }
 
-      this.keyhandler_pressHandlers[key].push(handler);
-    }
+      this.key_pressHandlers[key].push(handler);
+    };
 
 
     /**
@@ -148,15 +148,15 @@
      *    all bound handlers for `key` are removed.
      */
     Hermes.prototype.unbindKeyPress = function (key, opt_handler) {
-      if (this.keyhandler_pressHandlers[key]) {
+      if (this.key_pressHandlers[key]) {
         if (opt_handler) {
-          this.keyhandler_pressHandlers[key] = _.without(
-              this.keyhandler_pressHandlers[key], opt_handler);
+          this.key_pressHandlers[key] = _.without(
+              this.key_pressHandlers[key], opt_handler);
         } else {
-          this.keyhandler_pressHandlers[key].length = 0;
+          this.key_pressHandlers[key].length = 0;
         }
       }
-    }
+    };
 
 
   });
