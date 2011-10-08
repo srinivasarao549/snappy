@@ -5,7 +5,8 @@
 
 ;(function hermesCore (global) {
   define(['lib/underscore'], function () {
-    var gh;
+    var gh
+        ,defaultConfig;
 
 
     /**
@@ -23,26 +24,30 @@
     function now () {
       return +(new Date());
     }
+    
+    
+    defaultConfig = {
+      'height': 300
+      ,'width': 500
+      ,'color': '#ddd'
+      ,'fps': 30
+    };
 
 
     /**
      * Constructor.  Creates a Hermes instance.
      * @param {HTMLCanvasElement} canvas
+     * @param {Object} opt_config
      * @returns {Hermes}
      */
-    gh = global.Hermes = global.Hermes || function Hermes (canvas) {
-
+    gh = global.Hermes = global.Hermes || function Hermes (canvas, opt_config) {
       var self;
 
       self = this;
       this.canvas = canvas;
       this.context = canvas.getContext('2d');
+      this.config = _.defaults(opt_config || {}, defaultConfig);
       this._tickSteps = [];
-
-      this.config = {
-        'fps': 30
-      };
-
       this._tick();
 
       return this;
