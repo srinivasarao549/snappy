@@ -77,7 +77,6 @@
       ,'now': now
     };
 
-
     return gh;
   });
 } (this));

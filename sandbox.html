@@ -8,7 +8,8 @@
     <canvas id="sandbox" style="background: black"></canvas>
     <script type="text/javascript">
       require([
-          'src/hermes.keyhandler.js'
+          'src/hermes.keyhandler'
+					,'test_scripts/keyhandler'
         ], function () {
           
           var canvas
@@ -16,24 +17,7 @@
           
           canvas = document.getElementById('sandbox');
           hermesInst = new Hermes(canvas);
-          hermesInst.keyhandler_init();
-
-          hermesInst.bindKeyHold(hermesInst.keys.UP, function () {
-            console.log('up is held');
-          });
-
-					hermesInst.bindKeyPress(hermesInst.keys.DOWN, function () {
-						console.log('down is pressed');
-					});
-					
-					var testBind = function () {
-						console.log('left is pressed');
-					};
-					
-					hermesInst.bindKeyPress(hermesInst.keys.LEFT, testBind);
-					hermesInst.unbindKeyPress(hermesInst.keys.LEFT, testBind);
-          
-          console.log(hermesInst);
+          keyhandlerTest(hermesInst);
         });
     </script>
   </body> 
