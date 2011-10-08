@@ -3,7 +3,7 @@
  *
  */
 
-;(function (global) {
+;(function hermesCore (global) {
   define(['lib/underscore'], function () {
     var gh;
 
@@ -22,7 +22,7 @@
       self = this;
       this.canvas = canvas;
       this.context = canvas.getContext('2d');
-      this.tickSteps = [];
+      this._tickSteps = [];
 
       this.config = {
         'fps': 30
@@ -39,8 +39,8 @@
 
       self = this;
 
-      for (i = 0; i < this.tickSteps.length; i++) {
-        this.tickSteps[i].handler.call(this); 
+      for (i = 0; i < this._tickSteps.length; i++) {
+        this._tickSteps[i].handler.call(this); 
       }
 
       setTimeout(function () {
