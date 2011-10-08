@@ -8,11 +8,11 @@ define(['src/hermes.key'], function () {
     'keyTest': function (hermesInst) {
       hermesInst.key_init();
 
-      hermesInst.bindKeyHold(hermesInst.keys.UP, function () {
+      hermesInst.key_bindHold(hermesInst.keys.UP, function () {
         console.log('up is held');
       });
 
-    	hermesInst.bindKeyPress(hermesInst.keys.DOWN, function () {
+    	hermesInst.key_bindPress(hermesInst.keys.DOWN, function () {
     		console.log('down is pressed');
     	});
 
@@ -20,8 +20,8 @@ define(['src/hermes.key'], function () {
     		console.log('left is pressed');
     	};
 
-    	hermesInst.bindKeyPress(hermesInst.keys.LEFT, testBind);
-    	hermesInst.unbindKeyPress(hermesInst.keys.LEFT, testBind);
+    	hermesInst.key_bindPress(hermesInst.keys.LEFT, testBind);
+    	hermesInst.key_unbindPress(hermesInst.keys.LEFT, testBind);
 
       console.log(hermesInst);
     }

@@ -104,7 +104,7 @@
      *    `handler` to.
      * @param {Function} handler The event handler function to be invoked.
      */
-    Hermes.prototype.bindKeyHold = function (key, handler) {
+    Hermes.prototype.key_bindHold = function (key, handler) {
       // TODO(jeremyckahn): Implement multiple handlers per key hold, as done 
       // with keypress.
       this.key_holdHandlers[key] = handler;
@@ -116,7 +116,7 @@
      * @param {number|string} key The keycode representing the key to unbind
      *    `handler` from.
      */
-    Hermes.prototype.unbindKeyHold = function (key) {
+    Hermes.prototype.key_unbindHold = function (key) {
       delete this.key_holdHandlers[key];
     };
 
@@ -129,7 +129,7 @@
      *    `handler` to.
      * @param {Function} handler The event handler function to be invoked.
      */
-    Hermes.prototype.bindKeyPress = function (key, handler) {
+    Hermes.prototype.key_bindPress = function (key, handler) {
       if (!this.key_pressHandlers[key]) {
         this.key_pressHandlers[key] = [];
         this.key_pressHandlers[key].canPressAgain = true;
@@ -147,7 +147,7 @@
      * @param {Function} opt_handler The function to be removed.  If omitted,
      *    all bound handlers for `key` are removed.
      */
-    Hermes.prototype.unbindKeyPress = function (key, opt_handler) {
+    Hermes.prototype.key_unbindPress = function (key, opt_handler) {
       if (this.key_pressHandlers[key]) {
         if (opt_handler) {
           this.key_pressHandlers[key] = _.without(
