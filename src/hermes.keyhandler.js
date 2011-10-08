@@ -64,7 +64,7 @@
     /**
      * Sets up the keyhandler module for a Hermes instance.
      */
-    Hermes.prototype.keyhandler_init = function keyhandler_init () {
+    Hermes.prototype.keyhandler_init = function () {
       var self;
 
       self = this;
