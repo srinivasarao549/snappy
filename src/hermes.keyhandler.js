@@ -4,7 +4,7 @@
  */
 
 ;(function hermesKeyhandler (global) {
-  define(['src/hermes.core', 'lib/underscore'], function (Hermes) {
+  define(['src/hermes.core'], function (Hermes) {
     var keyMap;
 
     

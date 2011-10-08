@@ -8,16 +8,19 @@
     <canvas id="sandbox" style="background: black"></canvas>
     <script type="text/javascript">
       require([
-          'src/hermes.keyhandler'
-					,'test_scripts/keyhandler'
-        ], function () {
+					'test_scripts/keyhandler'
+					,'test_scripts/canvas'
+        ], function testHermes () {
           
           var canvas
               ,hermesInst;
           
           canvas = document.getElementById('sandbox');
           hermesInst = new Hermes(canvas);
-          keyhandlerTest(hermesInst);
+
+					_.each(window.testModule, function (val, key) {
+						window.testModule[key](hermesInst);
+					})
         });
     </script>
   </body> 
