@@ -5,14 +5,14 @@ define(['src/hermes.key'], function () {
   }
   
   _.extend(window.testModule, {
-    'keyTest': function (hermesInst) {
-      hermesInst.key_init();
+    'keyTest': function (hermes) {
+      hermes.key_init();
 
-      hermesInst.key_bindHold(hermesInst.keys.UP, function () {
+      hermes.key_bindHold(hermes.keys.UP, function () {
         console.log('up is held');
       });
 
-    	hermesInst.key_bindPress(hermesInst.keys.DOWN, function () {
+    	hermes.key_bindPress(hermes.keys.DOWN, function () {
     		console.log('down is pressed');
     	});
 
@@ -20,10 +20,10 @@ define(['src/hermes.key'], function () {
     		console.log('left is pressed');
     	};
 
-    	hermesInst.key_bindPress(hermesInst.keys.LEFT, testBind);
-    	hermesInst.key_unbindPress(hermesInst.keys.LEFT, testBind);
+    	hermes.key_bindPress(hermes.keys.LEFT, testBind);
+    	hermes.key_unbindPress(hermes.keys.LEFT, testBind);
 
-      console.log(hermesInst);
+      console.log(hermes);
     }
   })
 });

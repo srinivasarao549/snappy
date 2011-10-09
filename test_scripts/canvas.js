@@ -5,8 +5,8 @@ define(['src/hermes.canvas'], function () {
   }
   
   _.extend(window.testModule, {
-    'canvasTest': function (hermesInst) {
-      hermesInst.canvas_init();
+    'canvasTest': function (hermes) {
+      hermes.canvas_init();
     }
   })
 });

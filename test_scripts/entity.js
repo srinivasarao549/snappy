@@ -5,10 +5,10 @@ define(['src/hermes.entity'], function () {
   }
   
   _.extend(window.testModule, {
-    'entityTest': function (hermesInst) {
+    'entityTest': function (hermes) {
       var entity;
       
-      entity = hermesInst.createNewEntity();
+      entity = hermes.createNewEntity();
       console.log(entity);
     }
   })

@@ -14,14 +14,14 @@
         ], function testHermes () {
           
           var canvas
-              ,hermesInst;
+              ,hermes;
           
           canvas = document.getElementById('sandbox');
-          hermesInst = new Hermes(canvas);
-					window.hermesInst = hermesInst;
+          hermes = new Hermes(canvas);
+					window.hermes = hermes;
 
 					_.each(window.testModule, function (val, key) {
-						window.testModule[key](hermesInst);
+						window.testModule[key](hermes);
 					})
         });
     </script>
