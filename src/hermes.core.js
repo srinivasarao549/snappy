@@ -46,6 +46,7 @@
       self = this;
       this.canvas = canvas;
       this.config = _.defaults(opt_config || {}, defaultConfig);
+      this.state = {};
       this._tickSteps = [];
       this._tick();
 

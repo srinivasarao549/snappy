@@ -4,7 +4,7 @@
  */
 
 ;(function hermeskey (global) {
-  define(['src/hermes.core'], function (Hermes) {
+  define(['src/hermes.core'], function () {
     var keyMap;
 
     

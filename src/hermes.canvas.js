@@ -3,7 +3,7 @@
  *  hermes.core.js
  */
 
-;(function (global) {
+;(function hermesCanvas (global) {
   define(['src/hermes.core'], function () {
     
     /**
