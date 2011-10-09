@@ -41,6 +41,7 @@
       self = this;
       this.canvas = canvas;
       this.config = _.defaults(opt_config || {}, defaultConfig);
+      this.entities = {};
       this.state = {};
       this._tickSteps = [];
       this._tick();
@@ -68,6 +69,20 @@
       setTimeout(function () {
         self._tick();
       }, 1000 / this.config.fps);
+    };
+
+
+    gh.prototype.addEntity = function (entity) {
+      if (this.entities.hasOwnProperty(entity.id)) {
+        throw 'Entity id "' + entity.id + '" already exists.';
+      }
+      
+      this.entities[entity.id] = entity;
+    };
+
+
+    gh.prototype.removeEntity = function (entity) {
+      delete this.entities[entity.id];
     };
 
 

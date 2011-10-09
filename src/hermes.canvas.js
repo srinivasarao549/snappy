@@ -28,7 +28,7 @@
      * Sets up an HTMLCanvas element to be used by Hermes.
      */
     Hermes.prototype.canvas_init = function () {
-      this.context = this.canvas.getContext('2d');
+      this.canvas_context = this.canvas.getContext('2d');
       this.canvas_dimensions({
         'height': this.config.height
         ,'width': this.config.width
@@ -89,7 +89,7 @@
       var currentDimensions;
       
       currentDimensions = this.canvas_dimensions();
-      this.context.clearRect(0, 0, currentDimensions.width, 
+      this.canvas_context.clearRect(0, 0, currentDimensions.width, 
           currentDimensions.height);
     };
     
