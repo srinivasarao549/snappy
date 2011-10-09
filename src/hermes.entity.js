@@ -1,4 +1,4 @@
-;(function hermesCanvas (global) {
+;(function hermesEntity (global) {
   define(['lib/underscore', 'lib/shifty', 'src/hermes.core'], function () {
     var defaultState
         ,idCounter;
@@ -23,7 +23,6 @@
 
 
     /**
-     * @private
      * Entity constructor.  Defines the base class for any game object that is
      * used in a Hermes game.
      * @param {Object} config An Object of properties that can be attached to
@@ -40,7 +39,7 @@
         this.id = getUniqueId();
       }
       
-      hermes.addEntity(this);
+      this.hermes.addEntity(this);
       
       return this;
     }
@@ -48,13 +47,11 @@
 
     // Entities have the capabilites of a Shifty `Tweenable` Object.
     Entity.prototype = new Tweenable();
-    
-    
-    Entity.prototype.draw = function () {
-      // To be overridden
-    }
 
 
+    /**
+     * Remove this Entity from the Hermes Object that it is associated with.
+     */
     Entity.prototype.destroy = function () {
       // Destroy me!
       this.hermes.removeEntity(this);
@@ -68,7 +65,16 @@
      * @returns {Entity}
      */
     Hermes.prototype.createNewEntity = function (config) {
-      return new Entity(config, this);
+      var newEntity;
+      
+      newEntity = new Entity(config, this);
+
+      return newEntity;
     }
+
+
+    // Expose Entity publicly.
+    Hermes.util.Entity = Entity;
+    
   });
 } (this));

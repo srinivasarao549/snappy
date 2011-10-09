@@ -72,6 +72,10 @@
     };
 
 
+    /**
+     * Adds an Entity to the internal store of Entity Objects.
+     * @param {Entity} entity The Entity to add.
+     */
     gh.prototype.addEntity = function (entity) {
       if (this.entities.hasOwnProperty(entity.id)) {
         throw 'Entity id "' + entity.id + '" already exists.';
@@ -81,6 +85,9 @@
     };
 
 
+    /**
+     * Removes an Entity from the internal store of Entity Objects.
+     */
     gh.prototype.removeEntity = function (entity) {
       delete this.entities[entity.id];
     };
