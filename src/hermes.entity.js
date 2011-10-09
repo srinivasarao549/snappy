@@ -1,10 +1,5 @@
-/**
- * Requires:
- *  hermes.core.js
- */
-
 ;(function hermesCanvas (global) {
-  define(['src/hermes.core'], function () {
+  define(['lib/underscore', 'lib/shifty', 'src/hermes.core'], function () {
     var defaultState;
     
     defaultState = {

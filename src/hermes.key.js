@@ -1,10 +1,5 @@
-/**
- * Requires:
- *  hermes.core.js
- */
-
 ;(function hermeskey (global) {
-  define(['src/hermes.core'], function () {
+  define(['lib/underscore', 'src/hermes.core'], function () {
     var keyMap;
 
     

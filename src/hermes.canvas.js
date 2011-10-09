@@ -1,10 +1,5 @@
-/**
- * Requires:
- *  hermes.core.js
- */
-
 ;(function hermesCanvas (global) {
-  define(['src/hermes.core'], function () {
+  define(['lib/underscore', 'src/hermes.core'], function () {
     
     /**
      * @private
