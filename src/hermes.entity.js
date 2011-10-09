@@ -10,13 +10,18 @@
     defaultState = {
       'x': 0
       ,'y': 0
+      ,'opacity': 1
       ,'height': 50
       ,'width': 50
     };
     
     function Entity (config, hermes) {
-      _.defaults(this, config);
+      _.defaults(this, defaultState, config);
       this.hermes = hermes;
+    }
+    
+    Entity.prototype.draw = function () {
+      
     }
     
     Hermes.prototype.createNewEntity = function (config) {
