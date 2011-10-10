@@ -20,6 +20,14 @@
       ,'height': 50
       ,'width': 50
     };
+    
+    
+    /**
+     * @private
+     */
+    Hermes.prototype._tick_entitiy = function () {
+      
+    };
 
 
     /**
@@ -32,7 +40,8 @@
      * @returns {Entity}
      */
     function Entity (config, hermes) {
-      _.defaults(this, defaultState, config);
+      _.extend(this, config);
+      _.defaults(this, defaultState);
       this.hermes = hermes;
       
       if (!this.id) {
@@ -50,12 +59,22 @@
 
 
     /**
+     * This method is a no-op; it's meant to be overridden by each instance.
+     * `entity.draw` gets called each frame tick, and overriding versions
+     * should follow the same method signature.
+     */
+    Entity.prototype.draw = function () {
+      // To be overridden
+    };
+
+
+    /**
      * Remove this Entity from the Hermes Object that it is associated with.
      */
     Entity.prototype.destroy = function () {
       // Destroy me!
       this.hermes.removeEntity(this);
-    }
+    };
 
 
     /**
@@ -70,7 +89,7 @@
       newEntity = new Entity(config, this);
 
       return newEntity;
-    }
+    };
 
 
     // Expose Entity publicly.

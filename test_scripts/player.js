@@ -8,7 +8,21 @@
     _.extend(window.testModule, {
       'playerTest': function (hermes) {
         hermes.player_init({
-          //'isPlayer': true
+          'draw': function () {
+            //console.log('123')
+            var ctx = this.hermes.canvas_context;
+            ctx.beginPath();
+
+          	ctx.moveTo(this.x, this.y);
+          	ctx.lineTo(this.x + this.width, this.y);
+          	ctx.lineTo(this.x + this.width, this.y + this.height);
+          	ctx.lineTo(this.x, this.y + this.height);
+
+          	ctx.fillStyle = ctx.strokeStyle = this.color || '#f0f';
+          	ctx.fill();
+          	ctx.stroke();
+          	ctx.closePath();
+          }
         });
       }
     })

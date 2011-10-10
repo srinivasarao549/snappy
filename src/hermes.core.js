@@ -65,6 +65,10 @@
       for (i = 0; i < this._tickSteps.length; i++) {
         this._tickSteps[i].handler.call(this, currentTime); 
       }
+      
+      _.each(this.entities, function (entity) {
+        entity.draw();
+      }, this);
 
       setTimeout(function () {
         self._tick();
