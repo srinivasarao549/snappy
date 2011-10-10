@@ -9,7 +9,6 @@
       'playerTest': function (hermes) {
         hermes.player_init({
           'draw': function () {
-            //console.log('123')
             var ctx = this.hermes.canvas_context;
             ctx.beginPath();
 

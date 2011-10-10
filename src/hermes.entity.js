@@ -19,6 +19,7 @@
       ,'opacity': 1
       ,'height': 50
       ,'width': 50
+      ,'velocity': 90
     };
     
     
@@ -49,6 +50,13 @@
       }
       
       this.hermes.addEntity(this);
+      this.set({
+        'x': this.x
+        ,'y': this.y
+        ,'height': this.height
+        ,'width': this.width
+        ,'opacity': this.opacity
+      });
       
       return this;
     }

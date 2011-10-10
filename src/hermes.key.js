@@ -33,6 +33,34 @@
 
 
     /**
+     * Generic event handler for the `window`'s keydown event.
+     * @param {Hermes} hermes
+     * @param {KeyboardEvent} ev
+     */
+    function keydownHandler (hermes, ev) {
+      hermes.key_keysdown[ev.which] = true;
+    };
+
+
+    /**
+     * Generic event handler for the `window`'s keyup event.
+     * @param {Hermes} hermes
+     * @param {KeyboardEvent} ev
+     */
+    function keyupHandler (hermes, ev) {
+      delete hermes.key_keysdown[ev.which];
+      
+      _.each(hermes.key_pressHandlers, function (handlerList) {
+        handlerList.canPressAgain = true;
+      });
+
+      _.each(hermes.key_releaseHandlers[ev.which], function (handler) {
+        handler.call(hermes);
+      });
+    };
+
+
+    /**
      * Utility list that contains keycodes.
      */
     Hermes.prototype.keys = {
@@ -66,23 +94,15 @@
       this.key_keysdown = {};
       this.key_holdHandlers = {};
       this.key_pressHandlers = {};
+      this.key_releaseHandlers = {};
 
-      function keydownHandler (ev) {
-        self.key_keysdown[ev.which] = true;
-      };
-
-      function keyupHandler (ev) {
-        delete self.key_keysdown[ev.which];
-        
-        _.each(self.key_pressHandlers, function (val, key) {
-          self.key_pressHandlers[key].canPressAgain = true;
-        });
-      };
-
-      // TODO(jeremyckahn): These never get unbound, there needs to be a way to
-      // do that.
-      document.body.addEventListener('keydown', keydownHandler, false);
-      document.body.addEventListener('keyup', keyupHandler, false);
+      document.body.addEventListener('keydown', function (ev) {
+        keydownHandler(self, ev);
+      }, false);
+      
+      document.body.addEventListener('keyup', function (ev) {
+        keyupHandler(self, ev);
+      }, false);
 
       this._tickSteps.push({
         'name': 'key'
@@ -154,5 +174,38 @@
     };
 
 
+    /**
+     * Binds an handler to be invoked when a key is released.
+     * @param {number|string} key The keycode representing the key to bind
+     *    `handler` to.
+     * @param {Function} handler The event handler function to be invoked.
+     */
+    Hermes.prototype.key_bindRelease = function (key, handler) {
+      if (!this.key_releaseHandlers[key]) {
+        this.key_releaseHandlers[key] = [];
+      }
+
+      this.key_releaseHandlers[key].push(handler);      
+    };
+
+
+    /**
+     * Removes a handler from list of handlers to be invoked for a "released"
+     * key.
+     * @param {number|string} key The keycode representing the key to unbind
+     *    `handler` from.
+     * @param {Function} opt_handler The function to be removed.  If omitted,
+     *    all bound handlers for `key` are removed.
+     */
+    Hermes.prototype.key_unbindRelease = function (key, opt_handler) {
+      if (this.key_releaseHandlers[key]) {
+        if (opt_handler) {
+          this.key_releaseHandlers[key] = _.without(
+              this.key_releaseHandlers[key], opt_handler);
+        } else {
+          this.key_releaseHandlers[key].length = 0;
+        }
+      }
+    };
   });
 } (this));
