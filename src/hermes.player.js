@@ -1,7 +1,8 @@
 ;(function hermesPlayer (global) {
   define(['lib/underscore', 'src/hermes.entity'], function () {
 
-    function bindMovementKeys (hermes, entity) {
+    // OH MY GOD WHAT THE FUCK HAPPENED HERE
+    /*function bindMovementKeys (hermes, entity) {
       _.each({ 'UP': -entity.velocity, 'DOWN': entity.velocity,
         'LEFT': -entity.velocity, 'RIGHT': entity.velocity}
         ,function (velocity, direction) {
@@ -46,11 +47,15 @@
           entity.stop();
       	});
       });
+    }*/
+    
+    function bindMovementKeys (hermes, entity) {
+      
     }
 
-    function Player (config, hermes) {
+    function Player (config, state, hermes) {
       // Steal `Entity`'s constructor.
-      Hermes.util.Entity.call(this, config, hermes);
+      Hermes.util.Entity.call(this, config, state, hermes);
       
       bindMovementKeys(hermes, this);
       
@@ -66,8 +71,8 @@
      * Set up a new Player.  This also registers the Player instance with
      *    Hermes.
      */
-    Hermes.prototype.player_init = function (config) {
-      return new Player(config, this);
+    Hermes.prototype.player_init = function (config, state) {
+      return new Player(config, state, this);
     };
 
 

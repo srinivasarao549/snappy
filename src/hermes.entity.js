@@ -1,6 +1,7 @@
 ;(function hermesEntity (global) {
   define(['lib/underscore', 'lib/shifty', 'src/hermes.core'], function () {
     var defaultState
+        ,defaultConfig
         ,idCounter;
 
 
@@ -21,6 +22,11 @@
       ,'width': 50
       ,'velocity': 90
     };
+
+
+    defaultConfig = {
+      
+    };
     
     
     /**
@@ -36,34 +42,37 @@
      * used in a Hermes game.
      * @param {Object} config An Object of properties that can be attached to
      *    a new Entity.  This overrides any predefined defaults.
+     * @param {Object} state An Object of properties to set as the default 
+     *    `Tweenable` `initialState` parameter.
      * @param {Hermes} hermes The Hermes instance to which this Entity is
      *    associated with.
      * @returns {Entity}
      */
-    function Entity (config, hermes) {
-      _.extend(this, config);
-      _.defaults(this, defaultState);
+    function Entity (config, state, hermes) {
+      config = config || {};
+      state = state || {};
+
+      Tweenable.call(this, {
+        'initialState': _.defaults(state, defaultState)
+      });
+
       this.hermes = hermes;
-      
+      _.extend(this, config);
+      this.fps = hermes.config.fps;
+
       if (!this.id) {
         this.id = getUniqueId();
       }
-      
+
       this.hermes.addEntity(this);
-      this.set({
-        'x': this.x
-        ,'y': this.y
-        ,'height': this.height
-        ,'width': this.width
-        ,'opacity': this.opacity
-      });
-      
+
       return this;
     }
 
 
     // Entities have the capabilites of a Shifty `Tweenable` Object.
-    Entity.prototype = new Tweenable();
+    //Entity.prototype = new Tweenable();
+    Entity.prototype = Tweenable.prototype;
 
 
     /**
@@ -87,14 +96,17 @@
 
     /**
      * Returns a new instance of Entity.
-     * @param {Object} config An Object of properties that can be attached to
+     * @param {Object} config An Object of properties that can be attached to 
+     *    the new Entity.
+     * @param {Object} state An Object of properties that can be attached to the
+     *    new Entity's config object.
      *    a new Entity.  This overrides any predefined defaults.
      * @returns {Entity}
      */
-    Hermes.prototype.createNewEntity = function (config) {
+    Hermes.prototype.createNewEntity = function (config, state) {
       var newEntity;
-      
-      newEntity = new Entity(config, this);
+
+      newEntity = new Entity(config, state, this);
 
       return newEntity;
     };

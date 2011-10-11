@@ -9,15 +9,16 @@
       'playerTest': function (hermes) {
         hermes.player_init({
           'draw': function () {
-            var ctx = this.hermes.canvas_context;
+            var ctx = this.hermes.canvas_context
+                ,state = this.get();
             ctx.beginPath();
 
-          	ctx.moveTo(this.x, this.y);
-          	ctx.lineTo(this.x + this.width, this.y);
-          	ctx.lineTo(this.x + this.width, this.y + this.height);
-          	ctx.lineTo(this.x, this.y + this.height);
+          	ctx.moveTo(state.x, state.y);
+          	ctx.lineTo(state.x + state.width, state.y);
+          	ctx.lineTo(state.x + state.width, state.y + state.height);
+          	ctx.lineTo(state.x, state.y + state.height);
 
-          	ctx.fillStyle = ctx.strokeStyle = this.color || '#f0f';
+          	ctx.fillStyle = ctx.strokeStyle = state.color || '#f0f';
           	ctx.fill();
           	ctx.stroke();
           	ctx.closePath();
