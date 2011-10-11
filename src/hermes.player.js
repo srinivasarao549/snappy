@@ -53,9 +53,9 @@
       
     }
 
-    function Player (config, state, hermes) {
+    function Player (hermes, config, state) {
       // Steal `Entity`'s constructor.
-      Hermes.util.Entity.call(this, config, state, hermes);
+      Hermes.util.Entity.call(this, hermes, config, state);
       
       bindMovementKeys(hermes, this);
       
@@ -72,7 +72,7 @@
      *    Hermes.
      */
     Hermes.prototype.player_init = function (config, state) {
-      return new Player(config, state, this);
+      return new Player(this, config, state);
     };
 
 

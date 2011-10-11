@@ -40,24 +40,24 @@
     /**
      * Entity constructor.  Defines the base class for any game object that is
      * used in a Hermes game.
-     * @param {Object} config An Object of properties that can be attached to
-     *    a new Entity.  This overrides any predefined defaults.
-     * @param {Object} state An Object of properties to set as the default 
-     *    `Tweenable` `initialState` parameter.
      * @param {Hermes} hermes The Hermes instance to which this Entity is
      *    associated with.
+     * @param {Object} opt_config An Object of properties that can be attached
+     *    to a new Entity.  This overrides any predefined defaults.
+     * @param {Object} opt_state An Object of properties to set as the default 
+     *    `Tweenable` `initialState` parameter.
      * @returns {Entity}
      */
-    function Entity (config, state, hermes) {
-      config = config || {};
-      state = state || {};
+    function Entity (hermes, opt_config, opt_state) {
+      opt_config = opt_config || {};
+      opt_state = opt_state || {};
 
       Tweenable.call(this, {
-        'initialState': _.defaults(state, defaultState)
+        'initialState': _.defaults(opt_state, defaultState)
       });
 
       this.hermes = hermes;
-      _.extend(this, config);
+      _.extend(this, opt_config);
       this.fps = hermes.config.fps;
 
       if (!this.id) {
@@ -70,8 +70,7 @@
     }
 
 
-    // Entities have the capabilites of a Shifty `Tweenable` Object.
-    //Entity.prototype = new Tweenable();
+    // Entity shares Tweenable's prototype.
     Entity.prototype = Tweenable.prototype;
 
 
@@ -106,7 +105,7 @@
     Hermes.prototype.createNewEntity = function (config, state) {
       var newEntity;
 
-      newEntity = new Entity(config, state, this);
+      newEntity = new Entity(this, config, state);
 
       return newEntity;
     };
