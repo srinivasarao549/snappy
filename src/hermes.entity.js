@@ -27,14 +27,6 @@
     defaultConfig = {
       
     };
-    
-    
-    /**
-     * @private
-     */
-    Hermes.prototype._tick_entitiy = function () {
-      
-    };
 
 
     /**

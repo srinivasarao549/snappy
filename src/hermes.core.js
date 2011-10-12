@@ -45,6 +45,7 @@
       this.state = {};
       this._tickSteps = [];
       this._tick();
+      this._previousTimestamp = now();
 
       return this;
     };
@@ -67,8 +68,10 @@
       }
       
       _.each(this.entities, function (entity) {
-        entity.draw();
+        entity.draw(currentTime, currentTime - this_previousTimestamp);
       }, this);
+
+      this_previousTimestamp = currentTime;
 
       setTimeout(function () {
         self._tick();

@@ -50,7 +50,7 @@
     }*/
     
     function bindMovementKeys (hermes, entity) {
-      
+
     }
 
     function Player (hermes, config, state) {
