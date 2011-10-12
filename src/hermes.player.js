@@ -50,7 +50,28 @@
     }*/
     
     function bindMovementKeys (hermes, entity) {
+      _.each({ 'UP': -entity.velocity, 'DOWN': entity.velocity,
+        'LEFT': -entity.velocity, 'RIGHT': entity.velocity}
+        ,function (velocity, direction) {
 
+        //var to
+        //    ,step;
+        //
+        //if (direction === 'UP'
+        //    || direction === 'DOWN') {
+        //  to = { 'y': entity.y + velocity };
+        //} else {
+        //  to = { 'x': entity.x + velocity };
+        //}
+
+        hermes.key_bindPress(hermes.keys[direction], function pressHandler () {
+
+      	});
+
+      	hermes.key_bindRelease(hermes.keys[direction], function () {
+
+      	});
+      });
     }
 
     function Player (hermes, config, state) {

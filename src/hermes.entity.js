@@ -20,12 +20,15 @@
       ,'opacity': 1
       ,'height': 50
       ,'width': 50
-      ,'velocity': 90
+      ,'velocityX': 0
+      ,'velocityY': 0
     };
 
 
     defaultConfig = {
-      
+      'attributes': {
+        'maxVelocity': 90
+      }
     };
 
 
@@ -41,11 +44,11 @@
      * @returns {Entity}
      */
     function Entity (hermes, opt_config, opt_state) {
-      opt_config = opt_config || {};
-      opt_state = opt_state || {};
+      opt_config = _.defaults(opt_config || {}, defaultConfig);
+      opt_state = _.defaults(opt_state || {}, defaultState);
 
       this.constructor.call(this, {
-        'initialState': _.defaults(opt_state, defaultState)
+        'initialState': opt_state
       });
 
       this.hermes = hermes;

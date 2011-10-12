@@ -70,7 +70,7 @@
       _.each(this.entities, function (entity) {
         entity.draw(currentTime, currentTime - this_previousTimestamp);
       }, this);
-
+      
       this_previousTimestamp = currentTime;
 
       setTimeout(function () {
