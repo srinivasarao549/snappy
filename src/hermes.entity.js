@@ -52,7 +52,7 @@
       opt_config = opt_config || {};
       opt_state = opt_state || {};
 
-      Tweenable.call(this, {
+      this.constructor.call(this, {
         'initialState': _.defaults(opt_state, defaultState)
       });
 
