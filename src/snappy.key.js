@@ -96,11 +96,11 @@
       this.key_pressHandlers = {};
       this.key_releaseHandlers = {};
 
-      document.body.addEventListener('keydown', function (ev) {
+      document.documentElement.addEventListener('keydown', function (ev) {
         keydownHandler(self, ev);
       }, false);
       
-      document.body.addEventListener('keyup', function (ev) {
+      document.documentElement.addEventListener('keyup', function (ev) {
         keyupHandler(self, ev);
       }, false);
 
