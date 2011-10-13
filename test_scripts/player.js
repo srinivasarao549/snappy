@@ -11,6 +11,7 @@
           'draw': function () {
             var ctx = this.snappy.canvas_context
                 ,state = this.get();
+
             ctx.beginPath();
 
           	ctx.moveTo(state.x, state.y);

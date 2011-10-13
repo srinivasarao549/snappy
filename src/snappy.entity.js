@@ -22,12 +22,15 @@
       ,'width': 50
       ,'velocityX': 0
       ,'velocityY': 0
+      ,'forceX': 0
+      ,'forceY': 0
     };
 
 
     defaultConfig = {
       'attributes': {
         'maxVelocity': 90
+        ,'acceleration': 20
       }
     };
 
@@ -85,6 +88,32 @@
     Entity.prototype.destroy = function () {
       // Destroy me!
       this.snappy.removeEntity(this);
+    };
+
+
+    /**
+     * Apply a "physical" force upon this Entity on a given axis.
+     * @param {string} axis The direction in which to apply the force.  Should
+     *    either "x" or "y".
+     * @param {number} amount The amount of force to apply in `axis`.  Can be
+     *    positive or negative.
+     */
+    Entity.prototype.applyForce = function (axis, amount) {
+      if (axis === 'x' || axis === 'y') {
+        this.get()[axis] = amount;
+      }
+    };
+
+
+    /**
+     * Reset the force that was applied with entity.applyForce().
+     * @param {string} axis The direction in which to reset the force.  Should
+     *    either "x" or "y".
+     */
+    Entity.prototype.resetForce = function (axis) {
+      if (axis === 'x' || axis === 'y') {
+        this.get()[axis] = 0;
+      }
     };
 
 

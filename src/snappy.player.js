@@ -1,75 +1,26 @@
 ;(function snappyPlayer (global) {
   define(['lib/underscore', 'src/snappy.entity'], function () {
 
-    // OH MY GOD WHAT THE FUCK HAPPENED HERE
-    /*function bindMovementKeys (snappy, entity) {
-      _.each({ 'UP': -entity.velocity, 'DOWN': entity.velocity,
-        'LEFT': -entity.velocity, 'RIGHT': entity.velocity}
+    function bindMovementKeys (snappy, entity) {
+      _.each({ 'UP': -1, 'DOWN': 1,
+              'LEFT': -1, 'RIGHT': 1 }
         ,function (velocity, direction) {
-
-        var to
-            ,step;
+        
+        var axis;
 
         if (direction === 'UP'
             || direction === 'DOWN') {
-          to = { 'y': entity.y + velocity };
-          step = function () {
-            entity.y = this.y;
-          };
+          axis = 'y';
         } else {
-          to = { 'x': entity.x + velocity };
-          step = function () {
-            entity.x = this.x;
-          };
+          axis = 'x';
         }
 
         snappy.key_bindPress(snappy.keys[direction], function pressHandler () {
-          
-          entity.to({
-            'to': to
-            ,'duration': 1000
-            ,'easing': 'linear'
-            ,'step': step
-            ,'callback': function () {
-              if (direction === 'UP'
-                  || direction === 'DOWN') {
-                to = { 'y': this.y + velocity };
-              } else {
-                to = { 'x': this.x + velocity };
-              }   
-   
-              pressHandler();
-            }
-          });
+          entity.applyForce(axis, velocity);
       	});
 
       	snappy.key_bindRelease(snappy.keys[direction], function () {
-          entity.stop();
-      	});
-      });
-    }*/
-    
-    function bindMovementKeys (snappy, entity) {
-      _.each({ 'UP': -entity.velocity, 'DOWN': entity.velocity,
-        'LEFT': -entity.velocity, 'RIGHT': entity.velocity}
-        ,function (velocity, direction) {
-
-        //var to
-        //    ,step;
-        //
-        //if (direction === 'UP'
-        //    || direction === 'DOWN') {
-        //  to = { 'y': entity.y + velocity };
-        //} else {
-        //  to = { 'x': entity.x + velocity };
-        //}
-
-        snappy.key_bindPress(snappy.keys[direction], function pressHandler () {
-
-      	});
-
-      	snappy.key_bindRelease(snappy.keys[direction], function () {
-
+          entity.resetForce(axis);
       	});
       });
     }
