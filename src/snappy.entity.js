@@ -103,13 +103,13 @@
 
 
     /**
-     * Apply a "physical" force upon this Entity on a given axis.
+     * Set a "physical" force upon this Entity on a given axis.
      * @param {string} axis The direction in which to apply the force.  Should
      *    either "x" or "y".
      * @param {number} amount The amount of force to apply in `axis`.  Can be
      *    positive or negative.
      */
-    Entity.prototype.applyForce = function (axis, amount) {
+    Entity.prototype.setForce = function (axis, amount) {
       if (axis === 'x' || axis === 'y') {
         this.get()['force' + axis.toUpperCase()] = amount;
       }
@@ -117,7 +117,7 @@
 
 
     /**
-     * Reset the force that was applied with entity.applyForce().
+     * Reset the force that was applied with entity.setForce().
      * @param {string} axis The direction in which to reset the force.  Should
      *    either "x" or "y".
      */

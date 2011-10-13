@@ -16,7 +16,7 @@
         }
 
         snappy.key_bindPress(snappy.keys[direction], function pressHandler () {
-          entity.applyForce(axis, velocity);
+          entity.setForce(axis, velocity);
       	});
 
       	snappy.key_bindRelease(snappy.keys[direction], function () {
