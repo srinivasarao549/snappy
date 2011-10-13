@@ -60,6 +60,17 @@
     };
 
 
+    function windowBlurHandler (snappy, ev) {
+      _.each(snappy.key_keysdown, function (isDown, which) {
+        _.each(snappy.key_releaseHandlers[which], function (handler) {
+          handler.call(snappy);
+        });
+        
+        delete snappy.key_keysdown[which]
+      });
+    }
+
+
     /**
      * Utility list that contains keycodes.
      */
@@ -102,6 +113,10 @@
       
       document.documentElement.addEventListener('keyup', function (ev) {
         keyupHandler(self, ev);
+      }, false);
+
+      window.addEventListener('blur', function (ev) {
+        windowBlurHandler(self, ev);
       }, false);
 
       this._tickSteps.push({
