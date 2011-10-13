@@ -5,17 +5,17 @@
     
     /**
      * @private
-     * @param {Snappy} snappyInst The instance to invoke the keydown handlers
+     * @param {Snappy} snappy The instance to invoke the keydown handlers
      *    upon.
      * @param {number|string} forKey The keycode representing the key to 
      *    invoke the handlers for.
      */
-    function invokeKeydownHandlers (snappyInst, forKey) {
+    function invokeKeydownHandlers (snappy, forKey) {
       var i
           ,len
           ,handlerList;
           
-      handlerList = snappyInst.key_pressHandlers[forKey];
+      handlerList = snappy.key_pressHandlers[forKey];
       
       if ((handlerList)
           && (handlerList.length > 0)
@@ -24,7 +24,7 @@
         len = handlerList.length;
 
         for (i = 0; i < len; i++) {
-          handlerList[i].call(snappyInst);
+          handlerList[i].call(snappy);
         }
         
         handlerList.canPressAgain = false;
