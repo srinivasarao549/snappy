@@ -1,15 +1,15 @@
 ;(function (global) {
-  define(['src/hermes.player'], function () {
+  define(['src/snappy.player'], function () {
 
     if (!window.testModule) {
       window.testModule = {};
     }
 
     _.extend(window.testModule, {
-      'playerTest': function (hermes) {
-        hermes.player_init({
+      'playerTest': function (snappy) {
+        snappy.player_init({
           'draw': function () {
-            var ctx = this.hermes.canvas_context
+            var ctx = this.snappy.canvas_context
                 ,state = this.get();
             ctx.beginPath();
 

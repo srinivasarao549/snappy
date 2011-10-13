@@ -1,5 +1,5 @@
-;(function hermesEntity (global) {
-  define(['lib/underscore', 'lib/shifty', 'src/hermes.core'], function () {
+;(function snappyEntity (global) {
+  define(['lib/underscore', 'lib/shifty', 'src/snappy.core'], function () {
     var defaultState
         ,defaultConfig
         ,idCounter;
@@ -34,8 +34,8 @@
 
     /**
      * Entity constructor.  Defines the base class for any game object that is
-     * used in a Hermes game.
-     * @param {Hermes} hermes The Hermes instance to which this Entity is
+     * used in a Snappy game.
+     * @param {Snappy} snappy The Snappy instance to which this Entity is
      *    associated with.
      * @param {Object} opt_config An Object of properties that can be attached
      *    to a new Entity.  This overrides any predefined defaults.
@@ -43,7 +43,7 @@
      *    `Tweenable` `initialState` parameter.
      * @returns {Entity}
      */
-    function Entity (hermes, opt_config, opt_state) {
+    function Entity (snappy, opt_config, opt_state) {
       opt_config = _.defaults(opt_config || {}, defaultConfig);
       opt_state = _.defaults(opt_state || {}, defaultState);
 
@@ -51,15 +51,15 @@
         'initialState': opt_state
       });
 
-      this.hermes = hermes;
+      this.snappy = snappy;
       _.extend(this, opt_config);
-      this.fps = hermes.config.fps;
+      this.fps = snappy.config.fps;
 
       if (!this.id) {
         this.id = getUniqueId();
       }
 
-      this.hermes.addEntity(this);
+      this.snappy.addEntity(this);
 
       return this;
     }
@@ -80,11 +80,11 @@
 
 
     /**
-     * Remove this Entity from the Hermes Object that it is associated with.
+     * Remove this Entity from the Snappy Object that it is associated with.
      */
     Entity.prototype.destroy = function () {
       // Destroy me!
-      this.hermes.removeEntity(this);
+      this.snappy.removeEntity(this);
     };
 
 
@@ -97,7 +97,7 @@
      *    a new Entity.  This overrides any predefined defaults.
      * @returns {Entity}
      */
-    Hermes.prototype.createNewEntity = function (config, state) {
+    Snappy.prototype.createNewEntity = function (config, state) {
       var newEntity;
 
       newEntity = new Entity(this, config, state);
@@ -107,7 +107,7 @@
 
 
     // Expose Entity publicly.
-    Hermes.util.Entity = Entity;
+    Snappy.util.Entity = Entity;
     
   });
 } (this));

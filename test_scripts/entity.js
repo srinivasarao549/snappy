@@ -1,15 +1,15 @@
 ;(function (global) {
-  define(['src/hermes.entity'], function () {
+  define(['src/snappy.entity'], function () {
 
     if (!window.testModule) {
       window.testModule = {};
     }
 
     _.extend(window.testModule, {
-      'entityTest': function (hermes) {
+      'entityTest': function (snappy) {
         var entity;
 
-        entity = hermes.createNewEntity();
+        entity = snappy.createNewEntity();
         global.entity = entity;
       }
     })

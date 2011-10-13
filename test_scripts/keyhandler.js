@@ -1,18 +1,18 @@
-define(['src/hermes.key'], function () {
+define(['src/snappy.key'], function () {
   
   if (!window.testModule) {
     window.testModule = {};
   }
   
   _.extend(window.testModule, {
-    'keyTest': function (hermes) {
-      hermes.key_init();
+    'keyTest': function (snappy) {
+      snappy.key_init();
 
-      //hermes.key_bindHold(hermes.keys.UP, function () {
+      //snappy.key_bindHold(snappy.keys.UP, function () {
       //  console.log('up is held');
       //});
 
-    	//hermes.key_bindPress(hermes.keys.DOWN, function () {
+    	//snappy.key_bindPress(snappy.keys.DOWN, function () {
     	//	console.log('down is pressed');
     	//});
 
@@ -20,10 +20,10 @@ define(['src/hermes.key'], function () {
     		console.log('left is pressed');
     	};
 
-    	hermes.key_bindPress(hermes.keys.LEFT, testBind);
-    	hermes.key_unbindPress(hermes.keys.LEFT, testBind);
+    	snappy.key_bindPress(snappy.keys.LEFT, testBind);
+    	snappy.key_unbindPress(snappy.keys.LEFT, testBind);
 
-      console.log(hermes);
+      console.log(snappy);
     }
   })
 });

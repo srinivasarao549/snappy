@@ -1,12 +1,12 @@
-define(['src/hermes.canvas'], function () {
+define(['src/snappy.canvas'], function () {
   
   if (!window.testModule) {
     window.testModule = {};
   }
   
   _.extend(window.testModule, {
-    'canvasTest': function (hermes) {
-      hermes.canvas_init();
+    'canvasTest': function (snappy) {
+      snappy.canvas_init();
     }
   })
 });

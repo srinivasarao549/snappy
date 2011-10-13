@@ -1,6 +1,6 @@
-;(function hermesCore (global) {
+;(function snappyCore (global) {
   define(['lib/underscore'], function () {
-    var gh
+    var gs
         ,defaultConfig;
 
 
@@ -30,12 +30,12 @@
 
 
     /**
-     * Constructor.  Creates a Hermes instance.
+     * Constructor.  Creates a Snappy instance.
      * @param {HTMLCanvasElement} canvas
      * @param {Object} opt_config
-     * @returns {Hermes}
+     * @returns {Snappy}
      */
-    gh = global.Hermes = global.Hermes || function Hermes (canvas, opt_config) {
+    gs = global.Snappy = global.Snappy || function Snappy (canvas, opt_config) {
       var self;
 
       self = this;
@@ -55,7 +55,7 @@
      * @private
      * Executes all logic for the current frame.
      */
-    gh.prototype._tick = function () {
+    gs.prototype._tick = function () {
       var self
           ,i
           ,currentTime;
@@ -83,7 +83,7 @@
      * Adds an Entity to the internal store of Entity Objects.
      * @param {Entity} entity The Entity to add.
      */
-    gh.prototype.addEntity = function (entity) {
+    gs.prototype.addEntity = function (entity) {
       if (this.entities.hasOwnProperty(entity.id)) {
         throw 'Entity id "' + entity.id + '" already exists.';
       }
@@ -95,17 +95,17 @@
     /**
      * Removes an Entity from the internal store of Entity Objects.
      */
-    gh.prototype.removeEntity = function (entity) {
+    gs.prototype.removeEntity = function (entity) {
       delete this.entities[entity.id];
     };
 
 
     // Expose some useful utilities globally.
-    gh.util = {
+    gs.util = {
       'noop': noop
       ,'now': now
     };
 
-    return gh;
+    return gs;
   });
 } (this));

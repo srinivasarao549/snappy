@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">    
   <head> 
-    <title>Hermes!</title> 
+    <title>Snappy!</title> 
     <script type="text/javascript" charset="utf-8" src="lib/require.js"></script>
   </head> 
   <body>
@@ -12,17 +12,17 @@
 					,'test_scripts/canvas'
 					,'test_scripts/entity'
 					,'test_scripts/player'
-        ], function testHermes () {
+        ], function testSnappy () {
           
           var canvas
-              ,hermes;
+              ,snappy;
           
           canvas = document.getElementById('sandbox');
-          hermes = new Hermes(canvas);
-					window.hermes = hermes;
+          snappy = new Snappy(canvas);
+					window.snappy = snappy;
 
 					_.each(window.testModule, function (val, key) {
-						window.testModule[key](hermes);
+						window.testModule[key](snappy);
 					})
         });
     </script>

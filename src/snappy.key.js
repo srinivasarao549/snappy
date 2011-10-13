@@ -1,21 +1,21 @@
-;(function hermeskey (global) {
-  define(['lib/underscore', 'src/hermes.core'], function () {
+;(function snappykey (global) {
+  define(['lib/underscore', 'src/snappy.core'], function () {
     var keyMap;
 
     
     /**
      * @private
-     * @param {Hermes} hermesInst The instance to invoke the keydown handlers
+     * @param {Snappy} snappyInst The instance to invoke the keydown handlers
      *    upon.
      * @param {number|string} forKey The keycode representing the key to 
      *    invoke the handlers for.
      */
-    function invokeKeydownHandlers (hermesInst, forKey) {
+    function invokeKeydownHandlers (snappyInst, forKey) {
       var i
           ,len
           ,handlerList;
           
-      handlerList = hermesInst.key_pressHandlers[forKey];
+      handlerList = snappyInst.key_pressHandlers[forKey];
       
       if ((handlerList)
           && (handlerList.length > 0)
@@ -24,7 +24,7 @@
         len = handlerList.length;
 
         for (i = 0; i < len; i++) {
-          handlerList[i].call(hermesInst);
+          handlerList[i].call(snappyInst);
         }
         
         handlerList.canPressAgain = false;
@@ -34,28 +34,28 @@
 
     /**
      * Generic event handler for the `window`'s keydown event.
-     * @param {Hermes} hermes
+     * @param {Snappy} snappy
      * @param {KeyboardEvent} ev
      */
-    function keydownHandler (hermes, ev) {
-      hermes.key_keysdown[ev.which] = true;
+    function keydownHandler (snappy, ev) {
+      snappy.key_keysdown[ev.which] = true;
     };
 
 
     /**
      * Generic event handler for the `window`'s keyup event.
-     * @param {Hermes} hermes
+     * @param {Snappy} snappy
      * @param {KeyboardEvent} ev
      */
-    function keyupHandler (hermes, ev) {
-      delete hermes.key_keysdown[ev.which];
+    function keyupHandler (snappy, ev) {
+      delete snappy.key_keysdown[ev.which];
       
-      _.each(hermes.key_pressHandlers, function (handlerList) {
+      _.each(snappy.key_pressHandlers, function (handlerList) {
         handlerList.canPressAgain = true;
       });
 
-      _.each(hermes.key_releaseHandlers[ev.which], function (handler) {
-        handler.call(hermes);
+      _.each(snappy.key_releaseHandlers[ev.which], function (handler) {
+        handler.call(snappy);
       });
     };
 
@@ -63,7 +63,7 @@
     /**
      * Utility list that contains keycodes.
      */
-    Hermes.prototype.keys = {
+    Snappy.prototype.keys = {
       'UP': 38
       ,'DOWN': 40
       ,'LEFT': 37
@@ -76,18 +76,18 @@
      * Is called for every frame update to execute the handlers for all
      * pressed and held keys.
      */
-    Hermes.prototype._tick_key = function () {
+    Snappy.prototype._tick_key = function () {
       _.each(this.key_keysdown, function (val, key) {
-        (this.key_holdHandlers[key] || Hermes.util.noop).call(this);
+        (this.key_holdHandlers[key] || Snappy.util.noop).call(this);
         invokeKeydownHandlers(this, key);
       }, this);
     };
 
 
     /**
-     * Sets up the key module for a Hermes instance.
+     * Sets up the key module for a Snappy instance.
      */
-    Hermes.prototype.key_init = function () {
+    Snappy.prototype.key_init = function () {
       var self;
 
       self = this;
@@ -119,7 +119,7 @@
      *    `handler` to.
      * @param {Function} handler The event handler function to be invoked.
      */
-    Hermes.prototype.key_bindHold = function (key, handler) {
+    Snappy.prototype.key_bindHold = function (key, handler) {
       // TODO(jeremyckahn): Implement multiple handlers per key hold, as done 
       // with keypress.
       this.key_holdHandlers[key] = handler;
@@ -131,7 +131,7 @@
      * @param {number|string} key The keycode representing the key to unbind
      *    `handler` from.
      */
-    Hermes.prototype.key_unbindHold = function (key) {
+    Snappy.prototype.key_unbindHold = function (key) {
       delete this.key_holdHandlers[key];
     };
 
@@ -144,7 +144,7 @@
      *    `handler` to.
      * @param {Function} handler The event handler function to be invoked.
      */
-    Hermes.prototype.key_bindPress = function (key, handler) {
+    Snappy.prototype.key_bindPress = function (key, handler) {
       if (!this.key_pressHandlers[key]) {
         this.key_pressHandlers[key] = [];
         this.key_pressHandlers[key].canPressAgain = true;
@@ -162,7 +162,7 @@
      * @param {Function} opt_handler The function to be removed.  If omitted,
      *    all bound handlers for `key` are removed.
      */
-    Hermes.prototype.key_unbindPress = function (key, opt_handler) {
+    Snappy.prototype.key_unbindPress = function (key, opt_handler) {
       if (this.key_pressHandlers[key]) {
         if (opt_handler) {
           this.key_pressHandlers[key] = _.without(
@@ -180,7 +180,7 @@
      *    `handler` to.
      * @param {Function} handler The event handler function to be invoked.
      */
-    Hermes.prototype.key_bindRelease = function (key, handler) {
+    Snappy.prototype.key_bindRelease = function (key, handler) {
       if (!this.key_releaseHandlers[key]) {
         this.key_releaseHandlers[key] = [];
       }
@@ -197,7 +197,7 @@
      * @param {Function} opt_handler The function to be removed.  If omitted,
      *    all bound handlers for `key` are removed.
      */
-    Hermes.prototype.key_unbindRelease = function (key, opt_handler) {
+    Snappy.prototype.key_unbindRelease = function (key, opt_handler) {
       if (this.key_releaseHandlers[key]) {
         if (opt_handler) {
           this.key_releaseHandlers[key] = _.without(

@@ -1,5 +1,5 @@
-;(function hermesCanvas (global) {
-  define(['lib/underscore', 'src/hermes.core'], function () {
+;(function snappyCanvas (global) {
+  define(['lib/underscore', 'src/snappy.core'], function () {
     
     /**
      * @private
@@ -19,15 +19,15 @@
      * Is called for every frame update to do general canvas updates.
      * pressed and held keys.
      */
-    Hermes.prototype._tick_canvas = function () {
+    Snappy.prototype._tick_canvas = function () {
       this.canvas_clear();
     };
     
     
     /**
-     * Sets up an HTMLCanvas element to be used by Hermes.
+     * Sets up an HTMLCanvas element to be used by Snappy.
      */
-    Hermes.prototype.canvas_init = function () {
+    Snappy.prototype.canvas_init = function () {
       this.canvas_context = this.canvas.getContext('2d');
       this.canvas_dimensions({
         'height': this.config.height
@@ -43,13 +43,13 @@
 
 
     /**
-     * Gets or sets the height/width of the Hermes canvas.
+     * Gets or sets the height/width of the Snappy canvas.
      * @param {Object} opt_dimensions If supplied, the canvas' `height` and 
      *    `width` properties are set the this Object's corresponding properties.
      * @returns {Object} An Object containing the canvas' current 'height'
      *    and `width` properties.
      */
-    Hermes.prototype.canvas_dimensions = function (opt_dimensions) {
+    Snappy.prototype.canvas_dimensions = function (opt_dimensions) {
       if (opt_dimensions) {
         _.each(['height', 'width'], function (dimensionName) {
           if (opt_dimensions.hasOwnProperty(dimensionName)) {
@@ -69,11 +69,11 @@
 
 
     /**
-     * Gets or sets the color of the Hermes instance's canvas color.
+     * Gets or sets the color of the Snappy instance's canvas color.
      * @param {string} opt_newColor The color to set the canvas to.
      * @returns {string} The canvas' current background color.
      */
-    Hermes.prototype.canvas_color = function (opt_newColor) {
+    Snappy.prototype.canvas_color = function (opt_newColor) {
       if (opt_newColor) {
         this.canvas.style.backgroundColor = opt_newColor;
       }
@@ -85,7 +85,7 @@
     /**
      * Clears out the canvas and sets it back to its original color.
      */
-    Hermes.prototype.canvas_clear = function () {
+    Snappy.prototype.canvas_clear = function () {
       var currentDimensions;
       
       currentDimensions = this.canvas_dimensions();
