@@ -66,11 +66,15 @@
       for (i = 0; i < this._tickSteps.length; i++) {
         this._tickSteps[i].handler.call(this, currentTime); 
       }
-      
+
       _.each(this.entities, function (entity) {
-        entity.draw(currentTime, currentTime - this_previousTimestamp);
+        entity.tick(currentTime, currentTime - this_previousTimestamp);
       }, this);
       
+      _.each(this.entities, function (entity) {
+        entity.draw();
+      }, this);
+
       this_previousTimestamp = currentTime;
 
       setTimeout(function () {

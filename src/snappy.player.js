@@ -28,7 +28,6 @@
     function Player (snappy, config, state) {
       // Steal `Entity`'s constructor.
       Snappy.util.Entity.call(this, snappy, config, state);
-      
       bindMovementKeys(snappy, this);
       
       return this;

@@ -29,7 +29,7 @@
 
     defaultConfig = {
       'attributes': {
-        'maxVelocity': 90
+        'maxVelocity': 140
         ,'acceleration': 20
       }
     };
@@ -82,6 +82,17 @@
     };
 
 
+    Entity.prototype.tick = function (currentTime, timePassed) {
+      // Velocity: v = d/t, or vt = d
+      // Linear Acceleration: a = dv/dt
+      _.each({'forceX': 'x', 'forceY': 'y'}, function (axis, forceAmount) {
+        var appliedVelocity;
+        
+        appliedVelocity = this.get()[forceAmount] * this.attributes.maxVelocity;
+        this.get()[axis] += appliedVelocity * (timePassed / 1000);
+      }, this);
+    };
+
     /**
      * Remove this Entity from the Snappy Object that it is associated with.
      */
@@ -100,7 +111,7 @@
      */
     Entity.prototype.applyForce = function (axis, amount) {
       if (axis === 'x' || axis === 'y') {
-        this.get()[axis] = amount;
+        this.get()['force' + axis.toUpperCase()] = amount;
       }
     };
 
@@ -112,7 +123,7 @@
      */
     Entity.prototype.resetForce = function (axis) {
       if (axis === 'x' || axis === 'y') {
-        this.get()[axis] = 0;
+        this.get()['force' + axis.toUpperCase()] = 0;
       }
     };
 
