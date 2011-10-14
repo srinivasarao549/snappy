@@ -22,8 +22,6 @@
       ,'width': 50
       ,'velocityX': 0
       ,'velocityY': 0
-      ,'previous_velocityX': 0
-      ,'previous_velocityY': 0
       ,'forceX': 0
       ,'forceY': 0
     };
@@ -33,6 +31,7 @@
       'attributes': {
         'maxVelocity': 140
         ,'acceleration': 20
+        ,'mass': 40
       }
     };
 
