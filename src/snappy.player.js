@@ -1,9 +1,11 @@
 ;(function snappyPlayer (global) {
   define(['lib/underscore', 'src/snappy.entity'], function () {
+    
+    var CONTROL_FORCE = 50;
 
     function bindMovementKeys (snappy, entity) {
-      _.each({ 'UP': -1, 'DOWN': 1,
-              'LEFT': -1, 'RIGHT': 1 }
+      _.each({ 'UP': -CONTROL_FORCE, 'DOWN': CONTROL_FORCE,
+              'LEFT': -CONTROL_FORCE, 'RIGHT': CONTROL_FORCE }
         ,function (velocity, direction) {
         
         var axis;
