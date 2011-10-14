@@ -22,6 +22,8 @@
       ,'width': 50
       ,'velocityX': 0
       ,'velocityY': 0
+      ,'previous_velocityX': 0
+      ,'previous_velocityY': 0
       ,'forceX': 0
       ,'forceY': 0
     };
@@ -84,12 +86,24 @@
 
     Entity.prototype.tick = function (currentTime, timePassed) {
       // Velocity: v = d/t, or vt = d
-      // Linear Acceleration: a = dv/dt
-      _.each({'forceX': 'x', 'forceY': 'y'}, function (axis, forceAmount) {
-        var appliedVelocity;
+      // Linear Acceleration: a = dv/dt, or dt*a = dv
+      
+      // Uniform acceleration: v = u + at
+      // where u = initial velocity
+      // a = uniform acceleration
+      // t = time
+      
+      // http://gafferongames.com/game-physics/integration-basics/
+      
+      _.each({'forceX': 'x', 'forceY': 'y'}, function (axis, forceAxis) {
+        var appliedVelocity
+            ,previousVelocity
+            ,state;
+
+        state = this.get();
+        appliedVelocity = this.get()[forceAxis] * this.attributes.maxVelocity; 
+        state[axis] += appliedVelocity * (timePassed / 1000);
         
-        appliedVelocity = this.get()[forceAmount] * this.attributes.maxVelocity;
-        this.get()[axis] += appliedVelocity * (timePassed / 1000);
       }, this);
     };
 
