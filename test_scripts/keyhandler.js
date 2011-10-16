@@ -1,3 +1,5 @@
+// This file is not presently being used.  It can probably be deleted.
+
 define(['src/snappy.key'], function () {
   
   if (!window.testModule) {

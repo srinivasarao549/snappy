@@ -8,10 +8,10 @@
     <canvas id="sandbox" style="background: #f0f;"></canvas>
     <script type="text/javascript">
       require([
-					'test_scripts/keyhandler'
-					,'test_scripts/canvas'
-					,'test_scripts/entity'
+					//,'test_scripts/canvas'
+					//,'test_scripts/entity'
 					,'test_scripts/player'
+					,'src/snappy.canvas'
         ], function testSnappy () {
           
           var canvas
@@ -20,6 +20,10 @@
           canvas = document.getElementById('sandbox');
           snappy = new Snappy(canvas);
 					window.snappy = snappy;
+					console.log(snappy);
+					
+					snappy.canvas_init();
+					snappy.key_init();
 
 					_.each(window.testModule, function (val, key) {
 						window.testModule[key](snappy);

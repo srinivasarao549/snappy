@@ -1,5 +1,8 @@
 ;(function snappyEntity (global) {
-  define(['lib/underscore', 'lib/shifty', 'src/snappy.core'], function () {
+  define(['lib/underscore'
+          ,'lib/shifty'
+          ,'src/snappy.core'
+          ,'src/snappy.collision'], function () {
     var defaultState
         ,defaultConfig
         ,idCounter;

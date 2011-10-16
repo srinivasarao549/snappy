@@ -42,6 +42,7 @@
       this.canvas = canvas;
       this.config = _.defaults(opt_config || {}, defaultConfig);
       this.entities = {};
+      this.players = {};
       this.state = {};
       this._tickSteps = [];
       this._tick();

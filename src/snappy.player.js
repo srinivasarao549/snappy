@@ -1,7 +1,7 @@
 ;(function snappyPlayer (global) {
-  define(['lib/underscore', 'src/snappy.entity'], function () {
+  define(['lib/underscore', 'src/snappy.key', 'src/snappy.entity'], function () {
     
-    var CONTROL_FORCE = 50;
+    var CONTROL_FORCE = 1;
 
     function bindMovementKeys (snappy, entity) {
       _.each({ 'UP': -CONTROL_FORCE, 'DOWN': CONTROL_FORCE,
@@ -45,7 +45,12 @@
      *    Snappy.
      */
     Snappy.prototype.player_init = function (config, state) {
-      return new Player(this, config, state);
+      var newPlayer;
+      
+      newPlayer = new Player(this, config, state);
+      this.players[newPlayer.id] = newPlayer;
+
+      return newPlayer;
     };
 
 

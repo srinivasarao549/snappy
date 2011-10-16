@@ -1,3 +1,5 @@
+// This file is not presently being used.  It can probably be deleted.
+
 ;(function (global) {
   define(['src/snappy.entity'], function () {
 
